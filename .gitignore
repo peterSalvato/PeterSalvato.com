@@ -1,0 +1,8 @@
+/vendor/
+node_modules/
+.env
+.DS_Store
+*.log
+*.bak
+public/assets/*
+!public/assets/.gitkeep

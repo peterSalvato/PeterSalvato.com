@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+DIR="src/Projects/MathOnTape"
+
+mkdir -p "$DIR/Images"
+
+# Config.yaml
+cat > "$DIR/Config.yaml" <<'YAML'
+title: Math On Tape
+slug: math-on-tape
+group: CaseStudies
+layout: Gallery
+summary: A visual case study exploring analog math notation systems and experimental learning tools.
+images:
+  - src: Images/chalkboard.png
+    alt: Vintage chalkboard sketches on modular arithmetic.
+  - src: Images/cards.png
+    alt: Flashcards from the analog prototype set.
+  - src: Images/system.png
+    alt: Diagram showing symbol relationships in the visual syntax.
+  - src: Images/notations.png
+    alt: Grid of glyphs used in the notation language.
+YAML
+
+# Data.php stub
+touch "$DIR/Data.php"
+
+echo -e "✔ Created: $DIR with Config.yaml and sample gallery images"
