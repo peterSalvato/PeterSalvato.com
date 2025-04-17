@@ -1,34 +1,48 @@
-# 🛠️ PeterSalvato.com — Setup & Assistant Onboarding
-
+---
+title: Setup Instructions
+slug: setup
+updated: 2025-04-17
+summary: Local setup, script usage, and assistant onboarding protocol.
 ---
 
-## ⚙️ Local Setup
+# 🧰 Setup Guide — PeterSalvato.com
+
+## 🖥️ Local Environment
 
 ```bash
 composer install
-php scripts/build.php
-php -S localhost:8000 -t public
+php -S 127.0.0.1:8000 -t public
 
-    Requires PHP 8+, Composer, Symfony YAML
+🧪 Build Tools
 
-🤖 Assistant Guidelines
+./scripts/bootstrap.sh            # Creates empty scaffolds
+./scripts/build.php               # Generates Data.php + Meta.php from YAML
+./scripts/validate_structure.sh   # Lints naming, layout, and structure
 
-    DO NOT invent folder structure
+🤖 Assistant Usage Protocol
 
-    DO NOT rewrite projectPlan.md
+    Assistants must never guess project data or structure
 
-    DO generate Data.php and Meta.php using build.php
+    All logic must flow from Config.yaml → Data.php
 
-    DO follow all slug, group, and layout casing rules exactly
+    File casing, slugs, and layout enums must match system spec
 
-    DO enforce Savepoint protocol: no breaking structural shifts without formal record
+❌ Assistants may not:
 
-📚 Script Glossary
-Script	Purpose
-build.php	Converts all YAML to PHP
-bootstrap_remaining.sh	Fills any missing scaffolds
-validate_structure.sh	Slug/group/layout linter (TODO)
-layout.project.explainer.php	Renders explainer content
-layout.project.gallery.php	Needed for gallery content (TODO)
+    Inject copy into journal files
 
-📌 Savepoint: 2025-04-17-handoff-ready
+    Guess layout type or project intent
+
+    Propose structural refactors during Savepoint lock
+
+📦 Required Packages
+
+PHP 8.1+
+Composer dependencies:
+
+"symfony/yaml": "^6.0"
+
+    This file is part of the Savepoint scaffold. Do not modify structure without updating roadmap accordingly.
+
+
+---

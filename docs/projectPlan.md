@@ -1,143 +1,137 @@
-# 🧭 PeterSalvato.com — System Design & Planning Doc
-
-This file captures the foundational philosophy, architecture, and structural decisions that govern the entire site.
-
 ---
+title: Project Plan
+slug: project-plan
+updated: 2025-04-17
+summary: Core structure, principles, casing rules, and assistant constraints.
+---
+
+# 🧱 PeterSalvato.com — System Architecture & Plan
+
+This file contains the **core structural decisions and invariants** for `PeterSalvato.com`. It is intended to guide all development and assistant support without requiring additional clarification.
 
 ## 🔒 System Principles
 
-| Principle               | Enforcement                                                                 |
-|-------------------------|-----------------------------------------------------------------------------|
-| Encapsulation           | Each project and journal entry lives in its own PascalCase folder           |
-| Slug Authority          | All slugs use kebab-case, converted by slug_to_pascal()                     |
-| Data Immutability       | Data.php and Meta.php are generated, never hand-written                     |
-| No AI Inference         | All structure comes from user-defined source files                          |
-| Savepoint Protocol Lock | No structural edits may violate confirmed design without formal override    |
+| Principle               | Enforced Rule |
+|-------------------------|---------------|
+| **Encapsulation**       | Each project and journal entry lives in its own PascalCase folder under `/src/Projects/` or `/src/Journal/` |
+| **Scaffold Fidelity**   | All `Data.php` or `Meta.php` are generated from `Config.yaml` or Markdown |
+| **No Assistant Guessing** | Only user-provided config determines structure |
+| **Savepoint Lock**      | Assistants must not contradict previous validated architecture decisions |
 
----
+## 📁 Canonical Folder Structure
 
-## 📁 Canonical File Layout
+```plaintext
+/public/
+  index.php
+  assets/
 
-/public/ index.php assets/
+/src/
+  Projects/ProjectName/
+    Config.yaml
+    Data.php
+    Images/
 
-src/ Projects/ProjectName/ Config.yaml Data.php Images/
+  Journal/2025-04-13-OnBuildingSystems/
+    Config.yaml
+    Entry.md
+    Meta.php
+    Images/
 
-Journal/YYYY-MM-DD-Title/ Config.yaml Entry.md Meta.php Images/
+  Router/
+  Layout/
+  Partials/
 
-Layout/ Layout.php layout.project.explainer.php layout.project.gallery.php (TODO)
+/scripts/
+  build.php
+  bootstrap.sh
+  validate_structure.sh
 
-Router/ Project.php Journal.php JournalEntry.php
+✍️ Casing + Slug Rules
+Field	Format	Example
+group	PascalCase	CaseStudies, Systems
+slug	kebab-case	math-on-tape
+title	Sentence Case	Math on Tape
+🗂️ Layout Types
 
-Partials/ Nav.php, Head.php, Footer.php
+Projects use:
 
-/scripts/ build.php bootstrap.sh reset.sh validate_structure.sh (TODO)
+    layout: Explainer → structured sections with image/text
 
+    layout: Gallery → visual gallery block with images only
 
----
+Journal uses:
 
-## 🧭 Navigation Logic
+    Combined Config.yaml (frontmatter) + Entry.md content
 
-| Section             | URL Format                                      |
-|---------------------|--------------------------------------------------|
-| Case Studies        | `?page=project&project=altrueism`               |
-| Conceptual Projects | `?page=workshop/conceptual-projects/slug`      |
-| Artifacts           | `?page=project&project=the-deep-cuts`          |
-| Systems             | `?page=systems/savepoint-protocol`             |
-| Journal             | `/index.php?page=journal`                      |
+    Output Meta.php for routing + indexing
 
----
+🧠 Assistant Expectations
 
-## 📚 Journal Schema
+All assistants must:
 
-Each journal folder contains:
+    Use only user-defined structure (never invent logic)
 
-- `Config.yaml` → metadata (title, date, slug, tags)  
-- `Entry.md` → Markdown content  
-- `Meta.php` → generated via `build.php`  
-- `Images/` → optional
+    Honor casing + layout rules exactly
 
----
+    Never scaffold or wrap without confirmed spec
 
-## 🧱 Project Schema
-
-### Explainer
-```yaml
-layout: Explainer
-sections:
-  - title: ...
-    text: ...
-    image: Images/...
-    imageAlt: ...
-
-Gallery
-
-layout: Gallery
-images:
-  - src: Images/...
-    alt: ...
-
-🔐 Savepoint Mode
-
-This file is not to be rewritten by AI assistants.
-It is the canonical design document for structural continuity.
-
-If a future Savepoint evolves this system, that evolution must be recorded separately.
-
-📌 Savepoint: 2025-04-17-infra-canonical
+    Obey Savepoint and navigation structure
 
 
 ---
 
-## 📄 `projectRoadmap.md`
+## 📘 `_rebuild/projectRoadmap.md`
 
-```markdown
-# 📦 PeterSalvato.com — Build Roadmap
+```md
+---
+title: Project Roadmap
+slug: project-roadmap
+updated: 2025-04-17
+summary: Current completion map of all Projects and Journal entries.
+---
 
-Tracks real-world implementation progress of journal, projects, and system scripts.
+# 🗺️ Project & Journal Completion Tracker
+
+Tracks the current status of all journal entries and projects for launch.
+
+## 📝 Journal Entries
+
+| Date         | Title                        | Status     | Type     |
+|--------------|------------------------------|------------|----------|
+| 2025-04-12   | Savepoint Protocol           | ✅ Final    | Essay    |
+| 2025-04-13   | On Building Systems          | ✅ Final    | Essay    |
+| 2025-04-14   | The Order of the Ætherwright| ✅ Final    | Essay    |
+| 2025-04-15   | Poetic Infrastructure        | 🟡 Draft    | Essay    |
+| 2025-04-16   | Signals System               | ✅ Final    | Process  |
+| 2025-04-17   | Self-Sufficient Design       | 🟡 Draft    | Essay    |
+| 2025-04-18   | On Emergence                 | ⬜ Pending  | Essay    |
+
+## 🧱 Project Scaffold
+
+| Slug           | Title            | Layout     | Group        | Status   |
+|----------------|------------------|------------|--------------|----------|
+| aiden-jae      | Aiden Jae        | Explainer  | CaseStudies  | ✅ Final |
+| altrueism      | Altrueism        | Explainer  | CaseStudies  | ✅ Final |
+| math-on-tape   | Math on Tape     | Gallery    | CaseStudies  | ✅ Final |
+| echo-and-bone  | Echo & Stone     | Gallery    | Artifacts    | ⬜ Incomplete |
+| the-deep-cuts  | The Deep Cuts    | Gallery    | Artifacts    | ⬜ Incomplete |
+| photogeography | Photogeography   | Gallery    | ConceptualProjects | ⬜ Incomplete |
+| versograms     | Versograms       | Gallery    | ConceptualProjects | ⬜ Incomplete |
 
 ---
 
-## ✅ Phase 1: Bootstrap & Scaffolding
+## 🧭 Nav + Routing Status
 
-- [x] Initial repo + file structure
-- [x] `build.php` generates all data
-- [x] Journal entry scaffolding complete
-- [x] Project folder scaffolding complete
-- [x] Explainer layout rendering cleanly
-- [ ] Gallery layout rendering (TODO)
-- [ ] `signals.php` route/view (TODO)
-- [ ] `validate_structure.sh` (pending)
-- [ ] 404 fallback rendering (missing)
+All routes are functional:
+
+- `/index.php?page=project&project=altrueism`
+- `/index.php?page=journal`
+- `/index.php?page=journalEntry&slug=on-building-systems`
 
 ---
 
-## 🗓 Status Snapshot — 2025-04-17
+## ⏳ Next Priorities
 
-### ✅ Projects
-
-| Name               | Group              | Layout    | Slug              |
-|--------------------|--------------------|-----------|-------------------|
-| AidenJae           | CaseStudies        | N/A       | aiden-jae         |
-| Altrueism          | CaseStudies        | Explainer | altrueism         |
-| MathOnTape         | CaseStudies        | N/A       | math-on-tape      |
-| EchoAndBone        | Artifacts          | Explainer | echo-and-bone     |
-| TheDeepCuts        | Artifacts          | Gallery   | the-deep-cuts     |
-| Photogeography     | ConceptualProjects | Gallery   | photogeography    |
-| Versograms         | ConceptualProjects | Gallery   | versograms        |
-| OrderOfTheAetherwright | Systems      | Explainer | the-order-of-the-aetherwright |
-| SavepointProtocol  | Systems            | Explainer | savepoint-protocol |
-
----
-
-### ✅ Journal Entries
-
-- Savepoint Protocol  
-- On Building Systems  
-- The Order of the Ætherwright  
-- Poetic Infrastructure  
-- Signals System  
-- Self-Sufficient Design  
-- On Emergence (stub)
-
-📌 Snapshot tag: `2025-04-17-scaffold-complete`
-
+- Finalize missing journal copy (`Poetic Infrastructure`, `On Emergence`)
+- Build remaining `Data.php` for `EchoAndBone`, `Versograms`, etc.
+- Validate casing and regenerate slugs if needed

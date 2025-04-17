@@ -1,455 +1,76 @@
-    Purpose & Folder Structure
+---
+title: Project Roadmap
+slug: project-roadmap
+updated: 2025-04-17
+summary: Current completion map of all Projects and Journal entries.
+---
 
-    Content Types & Schema
+# 🗺️ Project & Journal Completion Tracker
 
-    Routing, Rendering & Components
-
-    Savepoints, Markdown, Conventions
-
-    Phase Roadmap (with 1.5)
-
-    Typography System & Font Tasks
-
-    Final Savepoint
-
-🧱 Part 1: Purpose & Folder Structure
-
-# 📘 BUILD-PLAN.md  
-**PeterSalvato.com — Canonical System Architecture**  
-_Last updated: 2025-04-16 — Savepoint Locked ✅_
+Tracks the current status of all journal entries and projects for Phase 1 launch.
 
 ---
 
-## 🧠 Purpose
+## ✅ Phase 1 Checklist
 
-PeterSalvato.com is a semantic publishing system designed to:
+### 🔧 Core System Setup
 
-- Preserve symbolic and structural creative work  
-- Publish essays, explainers, and visual projects with schema-driven clarity  
-- Enable long-term authorship and institutional visibility  
-- Prevent entropy across assistants, rebuilds, or resets
+- [x] Repo created and structure scaffolded
+- [x] `build.php` fully implemented
+- [x] Composer + Symfony YAML dependency installed
+- [x] Routing (Project, Journal, JournalEntry) functional
 
-This site is not a brand. It is a modular infrastructure.
+### 📘 Journal Entries
+
+| Date         | Title                        | Status     | Type     |
+|--------------|------------------------------|------------|----------|
+| 2025-04-12   | Savepoint Protocol           | ✅ Final    | Essay    |
+| 2025-04-13   | On Building Systems          | ✅ Final    | Essay    |
+| 2025-04-14   | The Order of the Ætherwright| ✅ Final    | Essay    |
+| 2025-04-15   | Poetic Infrastructure        | 🟡 Draft    | Essay    |
+| 2025-04-16   | Signals System               | ✅ Final    | Process  |
+| 2025-04-17   | Self-Sufficient Design       | 🟡 Draft    | Essay    |
+| 2025-04-18   | On Emergence                 | ⬜ Pending  | Essay    |
 
 ---
 
-## 🧱 Folder Structure
-
-/src/ /Journal/YYYY-MM-DD-Title/ Entry.md Images/ Meta.php
-
-/Projects/ProjectName/ Config.yaml Images/ Data.php
-
-/Static/ About.md Contact.md Home.md Signals.md
-
-/Router/ JournalEntry.php Project.php Static.php
-
-/Layout/ Layout.php
-
-/Partials/ Head.php, Nav.php, Footer.php
-
-/scripts/ /journal/ /projects/ /static/ build.php validate_structure.sh schema.php navBuilder.php indexBuilder.php
-
-/public/ /assets/ /fonts/ /css/ /js/
-
-/docs/ BUILD-PLAN.md
-
-✍️ Content Types
-Type	Folder	Format	Output
-Journal	/Journal/	Entry.md + frontmatter	Meta.php
-Project	/Projects/	Config.yaml	Data.php
-Static	/Static/	.md or .php	Rendered directly
-Signals	(reserved)	TBD (Phase 7)	Future system
-Savepoints	Any Markdown	<Savepoint> blocks	Rendered inline
-🔀 Group vs Layout Model
-
-Projects are classified along two independent axes:
-Key	Purpose
-group:	Cultural/semantic grouping (e.g., CaseStudies, Systems)
-layout:	Visual rendering mode (Explainer or Gallery)
-
-All projects live under /src/Projects/.
-Group determines index/nav. Layout controls frontend rendering logic.
-📜 Schemas
-📰 Journal Entry (Entry.md)
-
-title: string
-date: YYYY-MM-DD
-slug: kebab-case
-tags: [string, string]
-status: draft | published
-summary: string
-
-📁 Project (Config.yaml)
-
-title: string
-slug: kebab-case
-group: CaseStudies | ConceptualProjects | Artifacts | Systems
-layout: Explainer | Gallery
-summary: string
-
-sections:    # If Explainer
-  - title: string
-    text: string (Markdown)
-    image: Images/foo.png
-    imageAlt: string
-    caption: optional
-
-images:      # If Gallery
-  - src: Images/foo.png
-    alt: string
-    caption: optional
-
-    ⚠️ Config.yaml is the canonical source of authored content.
-    Populate fields intentionally — this is not placeholder data.
-
-📄 Static Pages (/Static/*.md)
-
-title: About
-slug: about
-summary: Brief description for SEO or nav
-status: published
-
-🔍 Routing & URLs
-URL Pattern	Route File
-/journal/{slug}	Router/JournalEntry.php
-/project/{slug}	Router/Project.php
-/systems/{slug}	Routed as project with group: Systems
-/about, /contact, /signals	Router/Static.php
-/404	Custom fallback in Static.php
-✅ Clean URLs via .htaccess
-
-RewriteEngine On
-RewriteRule ^journal/(.*)$ /index.php?page=journalEntry&entry=$1 [L]
-RewriteRule ^project/(.*)$ /index.php?page=project&project=$1 [L]
-RewriteRule ^systems/(.*)$ /index.php?page=project&project=$1 [L]
-RewriteRule ^(about|contact|home|signals)$ /index.php?page=$1 [L]
-
-🎨 Rendering Architecture
-
-    All output flows through Layout/Layout.php
-
-    Injects page content based on router + layout rules
-
-    Markdown is rendered for:
-
-        Journal Entry.md
-
-        Static .md
-
-        sections.text in Config.yaml
-
-    Explainers use sections renderer
-
-    Galleries use image grid renderer
-
-    Savepoints parsed and styled
-
-    Image Viewer used in both layout types
-
-🧩 Core Components
-Component	Purpose
-ImageViewer	Shared between Galleries and Explainers (click-to-zoom, modal)
-SavepointRenderer	Parses and styles <Savepoint> syntax
-MarkdownRenderer	Centralized Markdown parser for all content
-NavRenderer	Optional helper to build site nav
-AudioEmbed	Used for Signals or project embeds (Spotify/SoundCloud iframe only)
-
-    All components live in /src/Layout/ or /src/Partials/
-    Scripts and rendering helpers are kept logic-pure — no JS dependencies.
-
-
-🔐 Savepoint Protocol
-
-Savepoints are structured semantic blocks used to log conceptual change.
-Markdown Syntax Example:
-
-<Savepoint
-  protocol_version:3.0
-  category:[symbolic_structure]
-  function:[state_marker]
-  timestamp:2025-04-16T23:55:00-04:00
-  # This marks the moment the build system became fully aligned.
-  # All logic contributors must now refer to the locked plan.
-  #
-/>
-
-    Appears in Journal entries, Static pages, or Explainer text
-
-    Parsed into styled HTML block
-
-    Required fields: protocol_version, timestamp
-
-    Optional: category, function, tags, author
-
-🖋 Markdown Rendering
-
-All .md and text: content is rendered using a unified Markdown engine.
-Used in:
-
-    Journal Entry.md
-
-    Static .md
-
-    Project sections.text
-
-Rules:
-
-    Savepoints parsed within Markdown
-
-    Minimal inline HTML allowed (<figure>, <aside>, <div class="note">)
-
-    Code blocks and quotes supported
-
-    Image paths should be relative to Images/ folder
-
-    Avoid placing raw HTML in YAML
-    Do not rely on class-based JS triggers — use data-* attributes for hooks
-
-⚠️ Coding Conventions
-Rule	Format
-Folders	PascalCase
-Slugs	kebab-case
-Markdown	UTF-8, Unix line endings
-YAML	2-space indent, no tabs
-Behavior hooks	data-* attributes only
-Output files	Always named Data.php, Meta.php
-
-
-🚧 Phase Roadmap
-🔒 Phase 0: Lockpoint
-
-Savepoint declared
-
-Folder conventions enforced
-
-    Scaffolds created for Journal, Projects, Static
-
-🧱 Phase 1: Content Scaffolding
-
-Journal folders + entries created
-
-Project folders created (/src/Projects/)
-
-Static pages created (/Static/)
-
-    Sample layout + section templates prepared
-
-📚 Phase 1.5: Project Content Completion
-
-    Fill in canonical project copy inside each Config.yaml
-    This is the authored, final expression of each project’s logic and meaning.
-
-✅ Projects to complete:
-
-SavepointProtocol
-
-MathOnTape
-
-Altrueism
-
-AidenJae
-
-OrderOfTheAetherwright
-
-TheDeepCuts
-
-EchoAndBone
-
-Photogeography
-
-    Versograms
-
-📝 Tasks per project:
-
-Set title, slug, group, layout
-
-Write summary and each section’s text:
-
-Link image filenames under Images/
-
-Set alt: text (required), caption: (optional)
-
-Validate YAML structure (validate_structure.sh)
-
-    Commit only reviewed/approved content
-
-    This step must not be skipped.
-    Project rendering depends on correct and complete data.
-
-
-🛠 Phase 2: Build & Validation
-
-build.php → parses & compiles Meta.php, Data.php
-
-schema.php → schema definitions + field enums
-
-validate_structure.sh → folder casing, field types, slug collision
-
-    Slug uniqueness enforcement across Journal, Project, Static
-
-🧭 Phase 3: Routing
-
-Router/JournalEntry.php
-
-Router/Project.php
-
-Router/Static.php
-
-404 fallback routing
-
-    Clean URLs via .htaccess
-
-🎨 Phase 4: Rendering
-
-Layout/Layout.php (all content passes through here)
-
-Markdown renderer (for .md + text:)
-
-Savepoint rendering logic
-
-ImageViewer component (PHP + vanilla JS)
-
-Lightbox/modal click behavior
-
-    Optional back-navigation component
-
-🧭 Phase 5: Navigation & Indexing
-
-Journal index listing
-
-Project group index pages (/case-studies, /conceptual-projects, etc.)
-
-navBuilder.php → outputs nav structure
-
-indexBuilder.php → builds lists by type/group
-
-    Tag or group filters (optional)
-
-🛡 Phase 6: System Hardening & Typography
-
-Slug manifest / registry system
-
-Accessibility review (alt text, focus targets, ARIA roles)
-
-SEO meta + Open Graph tag injection
-
-Print/export CSS styles
-
-Image optimization (lazy loading, compression, responsive srcsets)
-
-Build caching (skip unchanged)
-
-Custom glyph font for Ætherwright Codex
-
-Distressed font layer for ritual print work
-
-    Typography system:
-
-        Chainprinter for UI/system voice
-
-        WornTypewriter for authored voice (journal/essay)
-
-🚀 Phase 7: Post-Launch Enhancements
-
-php build.php --entry=slug CLI mode
-
-Savepoint changelog or visualizer
-
-RSS feed for Journal
-
-Signals System (Phase 7)
-
-Search indexing (optional)
-
-    Unit + regression tests
-
-Here’s Part 7: Final Savepoint Declaration — the lock that seals this plan as canonical.
-🔖 Savepoint: Plan Lock
-
-<Savepoint
-  protocol_version:3.0
-  category:[master_plan]
-  function:[final_alignment]
-  timestamp:2025-04-16T23:55:00-04:00
-  # The PeterSalvato.com system architecture, schema, routing logic, content types,
-  rendering model, and visual language have been finalized and locked.
-  # This BUILD-PLAN.md is the single source of truth for all contributors, GPT assistants,
-  or automation tools. No changes may be introduced without updating this document
-  and logging a new Savepoint.
-  # Structure and sovereignty are now preserved.
-  Collapse prevention is active.
-/>
-
-
----
----
-
-## 📦 Status Update — Synced `2025-04-17`
-
-_This section provides a snapshot of the current site state following full project and journal scaffolding.  
-It reflects structural parity with the system spec as of Savepoint `2025-04-17`._
+## 🧱 Project Scaffold
+
+| Slug           | Title            | Layout     | Group               | Status   |
+|----------------|------------------|------------|----------------------|----------|
+| aiden-jae      | Aiden Jae        | Explainer  | CaseStudies          | ✅ Final |
+| altrueism      | Altrueism        | Explainer  | CaseStudies          | ✅ Final |
+| math-on-tape   | Math on Tape     | Gallery    | CaseStudies          | ✅ Final |
+| echo-and-bone  | Echo & Stone     | Gallery    | Artifacts            | ⬜ Incomplete |
+| the-deep-cuts  | The Deep Cuts    | Gallery    | Artifacts            | ⬜ Incomplete |
+| photogeography | Photogeography   | Gallery    | ConceptualProjects   | ⬜ Incomplete |
+| versograms     | Versograms       | Gallery    | ConceptualProjects   | ⬜ Incomplete |
+| the-order-of-the-aetherwright | The Order of the Ætherwright | Explainer | Systems | ✅ Final |
+| savepoint-protocol | Savepoint Protocol | Explainer | Systems | ✅ Final |
 
 ---
 
-### ✅ Scaffolded Projects
+## 🧭 Routing Status
 
-| Folder             | Layout    | Group                | Slug              |
-|--------------------|-----------|----------------------|-------------------|
-| AidenJae           | N/A       | CaseStudies          | aiden-jae         |
-| Altrueism          | Explainer | CaseStudies          | altrueism         |
-| MathOnTape         | N/A       | CaseStudies          | math-on-tape      |
-| EchoAndBone        | Explainer | Artifacts            | echo-and-bone     |
-| TheDeepCuts        | Gallery   | Artifacts            | the-deep-cuts     |
-| Photogeography     | Gallery   | ConceptualProjects   | photogeography    |
-| Versograms         | Gallery   | ConceptualProjects   | versograms        |
-| OrderOfTheAetherwright | Explainer | Systems          | the-order-of-the-aetherwright |
-| SavepointProtocol  | Explainer | Systems              | savepoint-protocol |
+| Route                         | Status  |
+|------------------------------|---------|
+| `?page=journal`              | ✅ OK   |
+| `?page=project&project=slug` | ✅ OK   |
+| `?page=journalEntry&slug=...`| ✅ OK   |
+| `?page=workshop/...`         | 🟡 Partial (awaits gallery layout) |
+| `?page=systems/...`          | ✅ OK   |
+| 404 fallback                 | ⬜ Missing |
 
 ---
 
-### ✅ Journal Entries
+## 🧩 Next Phase Targets
 
-| Folder                             | Title                   | Slug                  |
-|------------------------------------|--------------------------|------------------------|
-| 2025-04-12-SavepointProtocol       | Savepoint Protocol      | savepoint-protocol     |
-| 2025-04-13-OnBuildingSystems       | On Building Systems     | on-building-systems    |
-| 2025-04-14-TheOrderOfTheAetherwright | The Order of the Ætherwright | order-of-aetherwright |
-| 2025-04-15-PoeticInfrastructure    | Poetic Infrastructure   | poetic-infrastructure  |
-| 2025-04-16-SignalsSystem           | The Signals System      | signals-system         |
-| 2025-04-17-SelfSufficientDesign    | Self-Sufficient Design  | self-sufficient-design |
-| 2025-04-18-OnEmergence             | On Emergence            | on-emergence           |
+- [ ] Finalize journal copy: Poetic Infrastructure, Emergence
+- [ ] Complete project data for all gallery-based layouts
+- [ ] Implement `/Layout/layout.project.gallery.php`
+- [ ] Add graceful 404 rendering
+- [ ] Run `validate_structure.sh` once implemented
 
 ---
 
-### 🧠 Routing + Templates
-
-| Component                         | Status     | Notes |
-|----------------------------------|------------|-------|
-| `Router/Project.php`             | ✅ Active  | Slug-to-folder logic with kebab → PascalCase
-| `layout.project.explainer.php`   | ✅ Working | Fully rendering Explainer pages
-| `layout.project.gallery.php`     | ❌ Missing | Required for Gallery projects to function
-| `Nav.php` with kebab-case slugs  | ✅ Fixed   | Fully aligned with routing logic
-| Journal index + entries          | ✅ Working | `Meta.php` and markdown render
-| Systems routed as projects       | ✅ Working | Savepoint and Order of Ætherwright load as Explainers
-
----
-
-### 🚧 Remaining
-
-| Task                           | Status  | Notes |
-|--------------------------------|---------|-------|
-| `layout.project.gallery.php`   | ❌ TODO | Needed for 3 scaffolded gallery projects
-| `signals.php` view             | ❌ TODO | Route and layout missing
-| `validate_structure.sh`        | 🚧 Partial | Needs slug + layout + field checks
-| 404/fallback support           | ❌ TODO | Blank error output for bad routes
-| Signal glyph index             | ❌ Future | Planned for Phase 2
-
----
-
-🧭 Next Savepoint Candidate:  
-- Routing structure is stable  
-- Slug logic is canonical  
-- All scaffolds now deterministic
-
-📌 Log entry tagged `savepoint-protocol`, `scaffold-complete`, `phase-1-baseline`
-
+📌 Snapshot Tag: `savepoint-2025-04-17:scaffold-complete`
