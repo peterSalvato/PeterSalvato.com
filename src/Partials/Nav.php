@@ -22,7 +22,7 @@
         <li><strong>Artifacts</strong>
           <ul>
             <li><a href="/index.php?page=workshop/artifacts/the-deep-cuts">The Deep Cuts</a></li>
-            <li><a href="/index.php?page=project&project=echo-and-bone">Echo & Stone</a></li>
+            <li><a href="/index.php?page=project&project=echo-and-bone">Echo & Bone</a></li>
           </ul>
         </li>
       </ul>
