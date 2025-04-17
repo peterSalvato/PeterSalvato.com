@@ -53,12 +53,6 @@ This site is not a brand. It is a modular infrastructure.
 
 /docs/ BUILD-PLAN.md
 
-Let me know when to continue with Part 2: Content Types & Schema.
-You said:
-continue
-ChatGPT said:
-
-Here’s Part 2: Content Types & Schema of your final BUILD-PLAN.md.
 ✍️ Content Types
 Type	Folder	Format	Output
 Journal	/Journal/	Entry.md + frontmatter	Meta.php
@@ -115,12 +109,6 @@ slug: about
 summary: Brief description for SEO or nav
 status: published
 
-Let me know to continue with Part 3: Routing, Rendering, Components.
-You said:
-continue
-ChatGPT said:
-
-Here’s Part 3: Routing, Rendering, and Components of your final BUILD-PLAN.md.
 🔍 Routing & URLs
 URL Pattern	Route File
 /journal/{slug}	Router/JournalEntry.php
@@ -169,12 +157,7 @@ AudioEmbed	Used for Signals or project embeds (Spotify/SoundCloud iframe only)
     All components live in /src/Layout/ or /src/Partials/
     Scripts and rendering helpers are kept logic-pure — no JS dependencies.
 
-Let me know when to continue with Part 4: Savepoints, Markdown, and Coding Conventions.
-You said:
-continue
-ChatGPT said:
 
-Here’s Part 4: Savepoints, Markdown Rendering, and Coding Conventions of your final BUILD-PLAN.md.
 🔐 Savepoint Protocol
 
 Savepoints are structured semantic blocks used to log conceptual change.
@@ -231,12 +214,7 @@ YAML	2-space indent, no tabs
 Behavior hooks	data-* attributes only
 Output files	Always named Data.php, Meta.php
 
-Let me know to continue with Part 5: Phase Roadmap (including Phase 1.5).
-You said:
-continue
-ChatGPT said:
 
-Here’s Part 5: Full Phase Roadmap — including the critical 📚 Phase 1.5: Project Content Completion.
 🚧 Phase Roadmap
 🔒 Phase 0: Lockpoint
 
@@ -298,12 +276,7 @@ Validate YAML structure (validate_structure.sh)
     This step must not be skipped.
     Project rendering depends on correct and complete data.
 
-Let me know to continue with Part 6: Phases 2–7 + Font Tasks.
-You said:
-continue
-ChatGPT said:
 
-Here’s Part 6: Phases 2–7, now including your custom font system tasks for Chainprinter, Typewriter, and Ætherwright glyphs.
 🛠 Phase 2: Build & Validation
 
 build.php → parses & compiles Meta.php, Data.php
@@ -389,11 +362,6 @@ Signals System (Phase 7)
 Search indexing (optional)
 
     Unit + regression tests
-
-Let me know when to continue with Part 7: Final Savepoint Declaration.
-You said:
-continue
-ChatGPT said:
 
 Here’s Part 7: Final Savepoint Declaration — the lock that seals this plan as canonical.
 🔖 Savepoint: Plan Lock
