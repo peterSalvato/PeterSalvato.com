@@ -380,3 +380,76 @@ Here’s Part 7: Final Savepoint Declaration — the lock that seals this plan a
   Collapse prevention is active.
 />
 
+
+---
+---
+
+## 📦 Status Update — Synced `2025-04-17`
+
+_This section provides a snapshot of the current site state following full project and journal scaffolding.  
+It reflects structural parity with the system spec as of Savepoint `2025-04-17`._
+
+---
+
+### ✅ Scaffolded Projects
+
+| Folder             | Layout    | Group                | Slug              |
+|--------------------|-----------|----------------------|-------------------|
+| AidenJae           | N/A       | CaseStudies          | aiden-jae         |
+| Altrueism          | Explainer | CaseStudies          | altrueism         |
+| MathOnTape         | N/A       | CaseStudies          | math-on-tape      |
+| EchoAndBone        | Explainer | Artifacts            | echo-and-bone     |
+| TheDeepCuts        | Gallery   | Artifacts            | the-deep-cuts     |
+| Photogeography     | Gallery   | ConceptualProjects   | photogeography    |
+| Versograms         | Gallery   | ConceptualProjects   | versograms        |
+| OrderOfTheAetherwright | Explainer | Systems          | the-order-of-the-aetherwright |
+| SavepointProtocol  | Explainer | Systems              | savepoint-protocol |
+
+---
+
+### ✅ Journal Entries
+
+| Folder                             | Title                   | Slug                  |
+|------------------------------------|--------------------------|------------------------|
+| 2025-04-12-SavepointProtocol       | Savepoint Protocol      | savepoint-protocol     |
+| 2025-04-13-OnBuildingSystems       | On Building Systems     | on-building-systems    |
+| 2025-04-14-TheOrderOfTheAetherwright | The Order of the Ætherwright | order-of-aetherwright |
+| 2025-04-15-PoeticInfrastructure    | Poetic Infrastructure   | poetic-infrastructure  |
+| 2025-04-16-SignalsSystem           | The Signals System      | signals-system         |
+| 2025-04-17-SelfSufficientDesign    | Self-Sufficient Design  | self-sufficient-design |
+| 2025-04-18-OnEmergence             | On Emergence            | on-emergence           |
+
+---
+
+### 🧠 Routing + Templates
+
+| Component                         | Status     | Notes |
+|----------------------------------|------------|-------|
+| `Router/Project.php`             | ✅ Active  | Slug-to-folder logic with kebab → PascalCase
+| `layout.project.explainer.php`   | ✅ Working | Fully rendering Explainer pages
+| `layout.project.gallery.php`     | ❌ Missing | Required for Gallery projects to function
+| `Nav.php` with kebab-case slugs  | ✅ Fixed   | Fully aligned with routing logic
+| Journal index + entries          | ✅ Working | `Meta.php` and markdown render
+| Systems routed as projects       | ✅ Working | Savepoint and Order of Ætherwright load as Explainers
+
+---
+
+### 🚧 Remaining
+
+| Task                           | Status  | Notes |
+|--------------------------------|---------|-------|
+| `layout.project.gallery.php`   | ❌ TODO | Needed for 3 scaffolded gallery projects
+| `signals.php` view             | ❌ TODO | Route and layout missing
+| `validate_structure.sh`        | 🚧 Partial | Needs slug + layout + field checks
+| 404/fallback support           | ❌ TODO | Blank error output for bad routes
+| Signal glyph index             | ❌ Future | Planned for Phase 2
+
+---
+
+🧭 Next Savepoint Candidate:  
+- Routing structure is stable  
+- Slug logic is canonical  
+- All scaffolds now deterministic
+
+📌 Log entry tagged `savepoint-protocol`, `scaffold-complete`, `phase-1-baseline`
+
