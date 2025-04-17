@@ -1,14 +1,15 @@
-title: Math On Tape
+title: Math on Tape
 slug: math-on-tape
 group: CaseStudies
 layout: Gallery
-summary: A visual case study exploring analog math notation systems and experimental learning tools.
+summary: An analog visualization experiment mapping mathematical structures using magnetic tape.
+
 images:
-  - src: Images/chalkboard.png
-    alt: Vintage chalkboard sketches on modular arithmetic.
-  - src: Images/cards.png
-    alt: Flashcards from the analog prototype set.
-  - src: Images/system.png
-    alt: Diagram showing symbol relationships in the visual syntax.
-  - src: Images/notations.png
-    alt: Grid of glyphs used in the notation language.
+  - src: Images/tape-diagram-1.jpg
+    alt: Graphing functions on magnetic tape
+
+  - src: Images/tape-loop-2.jpg
+    alt: Audio loop showing topological repetition
+
+  - src: Images/tape-matrix-3.jpg
+    alt: Composite image of algebraic modulation

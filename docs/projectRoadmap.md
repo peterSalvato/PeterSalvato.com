@@ -65,7 +65,7 @@ This site is not a brand. It is a modular infrastructure.
 
 ---
 
-# ✍️ Content             
+# ✍️ Content ==================================================================            
 | Type       | Folder       | Format                     | Output              |
 |------------|--------------|----------------------------|---------------------|
 | Journal    | `/Journal/`  | `Entry.md` + frontmatter   | `Meta.php`          |
@@ -73,7 +73,7 @@ This site is not a brand. It is a modular infrastructure.
 | Static     | `/Static/`   | `.md` (or `.php`)          | Rendered directly   |
 | Signals    | (reserved)   | TBD (Phase 7)              | Not yet implemented |
 | Savepoints | Any Markdown | `<Savepoint>` block        | Styled output       |
-
+|==============================================================================|
 ---
 
 # 🔀 Group vs Layout System

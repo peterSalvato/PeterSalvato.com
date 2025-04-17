@@ -1,0 +1,47 @@
+<?php
+return array (
+  'title' => 'Aiden Jae',
+  'slug' => 'aiden-jae',
+  'group' => 'CaseStudies',
+  'layout' => 'Explainer',
+  'summary' => 'A modular identity system for a queer futurist composer, blending typographic recursion and symbolic layering.',
+  'sections' => 
+  array (
+    0 => 
+    array (
+      'title' => 'Identity as Echo',
+      'text' => 'Aiden Jae’s identity was never fixed. It reflected, it refracted—it bent.
+
+The design system mirrored this. Every glyph, every typographic form, echoed and nested across multiple meanings.
+
+Typography became structure. The system became biography.
+',
+      'image' => 'Images/aiden-reflection.jpg',
+      'imageAlt' => 'Recursive typographic echoes',
+    ),
+    1 => 
+    array (
+      'title' => 'Systems of Layered Meaning',
+      'text' => 'We didn’t design a logo. We designed a logic.
+
+Each glyph could be decomposed and recomposed across formats, creating a set of semiotic loops.
+
+This let us tell stories through repetition and variation—without explaining.
+',
+      'image' => 'Images/aiden-glyphs.jpg',
+      'imageAlt' => 'Symbolic form overlays',
+    ),
+    2 => 
+    array (
+      'title' => 'Ritual Through Form',
+      'text' => 'The final output wasn’t a brand book. It was a **ritual map**.
+
+Aiden could remix or republish elements freely—but the structure always held.
+
+Design, in this case, was presence encoded.
+',
+      'image' => 'Images/aiden-map.jpg',
+      'imageAlt' => 'Composite showing system layering',
+    ),
+  ),
+);

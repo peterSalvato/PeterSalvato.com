@@ -1,6 +1,6 @@
 ---
 title: On Building Systems
-date: 2025-04-13
+date: "2025-04-13"
 slug: on-building-systems
 tags: [systems, authorship, recursion, design]
 status: published
