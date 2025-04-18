@@ -6,20 +6,20 @@
     <li>
       <span>Workshop</span>
       <ul>
-        <li><strong>Conceptual Projects</strong>
+        <li><span>Conceptual Projects</span>
           <ul>
             <li><a href="/index.php?page=workshop/conceptual-projects/photogeography">Photogeography</a></li>
             <li><a href="/index.php?page=workshop/conceptual-projects/versograms">Versograms</a></li>
           </ul>
         </li>
-        <li><strong>Case Studies</strong>
+        <li><span>Case Studies</span>
           <ul>
             <li><a href="/index.php?page=workshop/case-studies/aiden-jae">Aiden Jae</a></li>
             <li><a href="/index.php?page=project&project=altrueism">Altrueism</a></li>
             <li><a href="/index.php?page=workshop/case-studies/math-on-tape">MathOnTape</a></li>
           </ul>
         </li>
-        <li><strong>Artifacts</strong>
+        <li><span>Artifacts</span>
           <ul>
             <li><a href="/index.php?page=workshop/artifacts/the-deep-cuts">The Deep Cuts</a></li>
             <li><a href="/index.php?page=project&project=echo-and-bone">Echo & Bone</a></li>
