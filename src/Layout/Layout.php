@@ -1,17 +1,18 @@
+<?php
+// Layout.php – Shell layout file
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>PeterSalvato.com</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <?php include __DIR__ . '/Head.php'; ?>
 </head>
 <body>
 
-<?php include __DIR__ . '/../Partials/Nav.php'; ?>
+  <?php include __DIR__ . '/Nav.php'; ?>
 
-<?= $content ?? '<!-- no content -->' ?>
+  <?= isset($content) ? $content : "<!-- no content -->" ?>
 
-<?php include __DIR__ . '/../Partials/Footer.php'; ?>
+  <?php include __DIR__ . '/Footer.php'; ?>
 
 </body>
 </html>

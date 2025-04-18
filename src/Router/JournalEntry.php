@@ -24,12 +24,18 @@ if (!file_exists($configPath) || !file_exists($entryPath)) {
 }
 
 $meta = Yaml::parseFile($configPath);
-$content = file_get_contents($entryPath);
-$html = \Parsedown::instance()->text($content);
+$markdown = file_get_contents($entryPath);
+$html = \Parsedown::instance()->text($markdown);
 
-layout('Journal', [
-    'title' => $meta['title'] ?? 'Untitled',
-    'date' => $meta['date'] ?? substr($entry, 0, 10),
-    'tags' => $meta['tags'] ?? '',
-    'content' => $html
-]);
+// Extract vars used in layout
+$title = $meta['title'] ?? 'Untitled';
+$date  = $meta['date'] ?? substr($entry, 0, 10);
+$tags  = $meta['tags'] ?? '';
+
+// Render page content
+ob_start();
+include __DIR__ . '/../Layout/layout.journal.php';
+$content = ob_get_clean();
+
+// Output wrapped layout
+include __DIR__ . '/../Layout/Layout.php';
