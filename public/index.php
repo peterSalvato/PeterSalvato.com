@@ -1,20 +1,34 @@
 <?php
+declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
+ob_start();
+
 $page = $_GET['page'] ?? 'home';
 
-// Map known routes
-$routes = [
-    'journal-entry' => __DIR__ . '/../src/Router/JournalEntry.php',
-    'journal'       => __DIR__ . '/../src/Router/Journal.php',
-    'project'       => __DIR__ . '/../src/Router/Project.php',
-    'home'          => __DIR__ . '/../src/Router/Home.php', // future
-];
+switch ($page) {
+    case 'project':
+        require __DIR__ . '/../src/Router/Project.php';
+        break;
 
-if (array_key_exists($page, $routes)) {
-    require $routes[$page];
-} else {
-    http_response_code(404);
-    echo "🔍 Page not found: $page";
+    case 'journal':
+        require __DIR__ . '/../src/Router/Journal.php';
+        break;
+
+    case 'journal-entry':
+        require __DIR__ . '/../src/Router/JournalEntry.php';
+        break;
+
+    case 'home':
+        require __DIR__ . '/../src/Router/Home.php';
+        break;
+
+    default:
+        echo "<main><h1>Router initialized — dispatch logic pending.</h1></main>";
+        break;
 }
+
+$content = ob_get_clean();
+
+require __DIR__ . '/../src/Layout/Layout.php';

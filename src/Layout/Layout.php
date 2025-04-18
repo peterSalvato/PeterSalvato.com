@@ -1,18 +1,25 @@
-<?php
-// Layout.php – Shell layout file
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <?php include __DIR__ . '/Head.php'; ?>
+  <?php
+  echo "<!-- trying to load head -->";
+  include __DIR__ . '/Partials/Head.php';
+  echo "<!-- head loaded -->";
+  ?>
 </head>
 <body>
+  <?php
+  echo "<!-- trying to load nav -->";
+  include __DIR__ . '/Partials/Nav.php';
+  echo "<!-- nav loaded -->";
+  ?>
 
-  <?php include __DIR__ . '/Nav.php'; ?>
+  <?= $content ?>
 
-  <?= isset($content) ? $content : "<!-- no content -->" ?>
-
-  <?php include __DIR__ . '/Footer.php'; ?>
-
+  <?php
+  echo "<!-- trying to load footer -->";
+  include __DIR__ . '/Partials/Footer.php';
+  echo "<!-- footer loaded -->";
+  ?>
 </body>
 </html>
