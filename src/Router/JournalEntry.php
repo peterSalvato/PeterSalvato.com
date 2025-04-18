@@ -1,39 +1,35 @@
 <?php
-declare(strict_types=1);
 
-$slug = $_GET['slug'] ?? null;
-if (!$slug) {
-    http_response_code(400);
-    exit('Missing ?slug=');
-}
+require __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../Layout/Layout.php';
 
-// 🔍 Find journal entry by matching slug in Meta.php
-$journalDirs = glob(__DIR__ . '/../Journal/*', GLOB_ONLYDIR);
+use Symfony\Component\Yaml\Yaml;
 
-$found = null;
-foreach ($journalDirs as $dir) {
-    $metaFile = "$dir/Meta.php";
-    $mdFile   = "$dir/Entry.md";
+$entry = $_GET['entry'] ?? null;
+$dir = __DIR__ . '/../Journal/' . $entry;
 
-    if (!file_exists($metaFile) || !file_exists($mdFile)) continue;
-
-    $meta = require $metaFile;
-    if (($meta['slug'] ?? '') === $slug) {
-        $found = ['meta' => $meta, 'md' => file_get_contents($mdFile)];
-        break;
-    }
-}
-
-if (!$found) {
+if (!$entry || !is_dir($dir)) {
     http_response_code(404);
-    exit("No entry found for slug: $slug");
+    echo "Journal entry not found.";
+    return;
 }
 
-$entry = $found;
+$configPath = "$dir/Config.yaml";
+$entryPath = "$dir/Entry.md";
 
-// 💾 Load into layout
-ob_start();
-include __DIR__ . '/../Layout/layout.journal.php';
-$content = ob_get_clean();
+if (!file_exists($configPath) || !file_exists($entryPath)) {
+    http_response_code(500);
+    echo "Entry is missing required files.";
+    return;
+}
 
-// Wrap
+$meta = Yaml::parseFile($configPath);
+$content = file_get_contents($entryPath);
+$html = \Parsedown::instance()->text($content);
+
+layout('Journal', [
+    'title' => $meta['title'] ?? 'Untitled',
+    'date' => $meta['date'] ?? substr($entry, 0, 10),
+    'tags' => $meta['tags'] ?? '',
+    'content' => $html
+]);

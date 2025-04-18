@@ -1,33 +1,20 @@
 <?php
-declare(strict_types=1);
 
-// Simple routing layer based on `?page=`
+require __DIR__ . '/../vendor/autoload.php';
+
 $page = $_GET['page'] ?? 'home';
 
-// Set default content buffer
-ob_start();
+// Map known routes
+$routes = [
+    'journal-entry' => __DIR__ . '/../src/Router/JournalEntry.php',
+    'journal'       => __DIR__ . '/../src/Router/Journal.php',
+    'project'       => __DIR__ . '/../src/Router/Project.php',
+    'home'          => __DIR__ . '/../src/Router/Home.php', // future
+];
 
-switch ($page) {
-    case 'project':
-        require __DIR__ . '/../src/Router/Project.php';
-        break;
-
-    case 'journal':
-        require __DIR__ . '/../src/Router/Journal.php';
-        break;
-
-    case 'journal-entry':
-        require __DIR__ . '/../src/Router/JournalEntry.php';
-        break;
-
-    default:
-        // Fallback content for now
-        echo "<main><h1>Router initialized — dispatch logic pending.</h1></main>";
-        break;
+if (array_key_exists($page, $routes)) {
+    require $routes[$page];
+} else {
+    http_response_code(404);
+    echo "🔍 Page not found: $page";
 }
-
-// Capture the inner view's output
-$content = ob_get_clean();
-
-// Wrap it in the global layout
-require __DIR__ . '/../src/Layout/Layout.php';

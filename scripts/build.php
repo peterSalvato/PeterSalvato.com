@@ -1,67 +1,44 @@
-#!/usr/bin/env php
 <?php
-declare(strict_types=1);
 
-// Autoload Symfony YAML parser
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Yaml\Yaml;
 
-$root = __DIR__ . '/../src';
-
-// --- 🔍 PROJECTS: Config.yaml → Data.php ---
-$projectDirs = glob("$root/Projects/*", GLOB_ONLYDIR);
-
-foreach ($projectDirs as $dir) {
-    $yamlFile = "$dir/Config.yaml";
-    $phpFile  = "$dir/Data.php";
-
-    if (!file_exists($yamlFile)) continue;
-
-    try {
-        $data = Yaml::parseFile($yamlFile);
-    } catch (Exception $e) {
-        echo "❌ YAML parse error in $yamlFile: " . $e->getMessage() . "\n";
-        continue;
-    }
-
-    if (!is_array($data)) {
-        echo "❌ Invalid structure in $yamlFile (not an array)\n";
-        continue;
-    }
-
-    file_put_contents($phpFile, "<?php\nreturn " . var_export($data, true) . ";\n");
-    echo "✔ Built: $phpFile\n";
+function write_php_array_file(string $path, array $data) {
+    $export = var_export($data, true);
+    file_put_contents($path, "<?php\nreturn $export;\n");
 }
 
-// --- 📘 JOURNAL: Entry.md frontmatter → Meta.php ---
-$journalDirs = glob("$root/Journal/*", GLOB_ONLYDIR);
+echo "🔧 Building data files...\n";
 
-foreach ($journalDirs as $dir) {
-    $mdFile   = "$dir/Entry.md";
-    $metaFile = "$dir/Meta.php";
+// --- Build Projects ---
+foreach (glob(__DIR__ . '/../src/Projects/*', GLOB_ONLYDIR) as $dir) {
+    $cfg = "$dir/Config.yaml";
+    $out = "$dir/Data.php";
 
-    if (!file_exists($mdFile)) continue;
-
-    $raw = file_get_contents($mdFile);
-
-    if (!preg_match('/^---(.*?)---/s', $raw, $match)) {
-        echo "⚠️  No frontmatter found in $mdFile\n";
+    if (!file_exists($cfg)) {
+        echo "⚠️  Skipping (no config): $dir\n";
         continue;
     }
 
-    try {
-        $meta = Yaml::parse(trim($match[1]));
-    } catch (Exception $e) {
-        echo "❌ YAML frontmatter error in $mdFile: " . $e->getMessage() . "\n";
-        continue;
-    }
-
-    if (!is_array($meta)) {
-        echo "❌ Invalid frontmatter in $mdFile (not an array)\n";
-        continue;
-    }
-
-    file_put_contents($metaFile, "<?php\nreturn " . var_export($meta, true) . ";\n");
-    echo "✔ Built: $metaFile\n";
+    $data = Yaml::parseFile($cfg);
+    write_php_array_file($out, $data);
+    echo "✅ Built Data.php for " . basename($dir) . "\n";
 }
+
+// --- Build Journal Entries ---
+foreach (glob(__DIR__ . '/../src/Journal/*', GLOB_ONLYDIR) as $dir) {
+    $cfg = "$dir/Config.yaml";
+    $out = "$dir/Meta.php";
+
+    if (!file_exists($cfg)) {
+        echo "⚠️  Skipping (no config): $dir\n";
+        continue;
+    }
+
+    $data = Yaml::parseFile($cfg);
+    write_php_array_file($out, $data);
+    echo "✅ Built Meta.php for " . basename($dir) . "\n";
+}
+
+echo "🏁 Done.\n";
